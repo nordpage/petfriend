@@ -10,5 +10,5 @@
   d. List of pets
   e. Settings
   
-### Стек технологий ###
+### 3. Стек технологий ###
 Kotlin, Dagger2, RxJava/ RxAndroid, DataBinding
