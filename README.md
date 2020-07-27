@@ -1,4 +1,5 @@
 # Pet Friend #
+![alt text](https://github.com/nordpage/petfriend/blob/master/ic_animal.png?raw=true)
 
 ### 1. Описание ###
 Приложение для мониторинга животных на передержке для последующего пристройства и помощи.
