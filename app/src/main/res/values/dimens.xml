@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logoSize">150dp</dimen>
+    <dimen name="full">128dp</dimen>
+    <dimen name="titleSize">32dp</dimen>
+</resources>
