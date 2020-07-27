@@ -1,4 +1,6 @@
 # Pet Friend #
+[![GitHub version](https://badge.fury.io/gh/Naereen%2FStrapDown.js.svg)](https://github.com/Naereen/StrapDown.js)
+
 ![alt text](https://github.com/nordpage/petfriend/blob/master/ic_animal.png?raw=true)
 
 ### 1. Описание ###
