@@ -1,6 +1,4 @@
 # Pet Friend #
-[![Generic badge](https://img.shields.io/badge/Version-1.0svg)](https://shields.io/)
-
 
 ![alt text](https://github.com/nordpage/petfriend/blob/master/ic_animal.png?raw=true)
 
