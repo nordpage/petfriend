@@ -12,17 +12,26 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel neque sit amet ex malesuada egestas. Vestibulum ac nisl posuere, ullamcorper mauris a, imperdiet est. Aenean quis diam sit amet nibh ullamcorper commodo. Integer efficitur, eros in malesuada bibendum, orci odio pulvinar lorem, a tristique metus nisl tincidunt felis. Fusce varius condimentum arcu a maximus. Nam vitae mauris a leo sagittis gravida. Morbi convallis lectus ac ante molestie posuere. Maecenas consectetur risus bibendum viverra placerat. Pellentesque rhoncus vel velit ut tristique. Praesent lectus tortor, sollicitudin vel massa in, interdum pulvinar ligula. Phasellus feugiat fermentum elit, quis pulvinar ligula cursus in. Sed venenatis sem quis efficitur laoreet. Nulla ornare porttitor lacus sit amet porttitor. Aenean ullamcorper libero sed urna semper euismod. Integer eleifend libero sed nibh dignissim, ut convallis nisl ultrices."
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/about_app"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/version" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

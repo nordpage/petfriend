@@ -8,20 +8,14 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-
+import xyz.mobcoder.petfriend.Extensions.getVersion
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pager!!.adapter = ViewPagerAdapter(this)
-        try {
-            val pInfo: PackageInfo = this.getPackageManager().getPackageInfo(packageName, 0)
-            val ver = pInfo.versionName
-            version.text = "Ver: $ver"
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
+        version.text = "Ver: ${getVersion(this)}"
         version.setOnClickListener {
             val bottomDialogFragment: BottomDialogFragment =
                 BottomDialogFragment.newInstance()
