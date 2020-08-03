@@ -1,4 +1,4 @@
-package xyz.mobcoder.petfriend
+package xyz.mobcoder.petfriend.ui.main
 
 import android.content.Context
 import android.content.pm.PackageInfo
@@ -8,6 +8,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import xyz.mobcoder.petfriend.R
+import xyz.mobcoder.petfriend.ViewPagerAdapter
+import xyz.mobcoder.petfriend.ui.bottom.BottomDialogFragment
 
 
 class MainActivity : AppCompatActivity() {
