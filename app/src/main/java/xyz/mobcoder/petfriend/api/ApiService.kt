@@ -11,8 +11,10 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
-import xyz.mobcoder.petfriend.Login
-import xyz.mobcoder.petfriend.Response
+import xyz.mobcoder.petfriend.Pet
+import xyz.mobcoder.petfriend.model.Response
+import xyz.mobcoder.petfriend.model.Token
+
 
 interface ApiService {
 
@@ -22,18 +24,18 @@ interface ApiService {
         @Query("email") email: String,
         @Query("password") password: String,
         @Query("c_password") c_password: String
-    ): Observable<Response<Login>>
+    ): Observable<Response<Token>>
 
     @POST("login")
     suspend fun loginUser(
         @Query("email") email: String,
         @Query("password") password: String
-    ) : Observable<Response<Login>>
+    ) : Observable<Response<Token>>
 
     @GET("pets")
     suspend fun getPets(
         @Header("Authorization") authHeader: String
-    ) : Observable<Response<Login>>
+    ) : Observable<Response<List<Pet>>>
 
     companion object {
         private const val BASE_URL = "https://quiet-retreat-54376.herokuapp.com/api/"
