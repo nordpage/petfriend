@@ -88,7 +88,7 @@ class ListFragment : Fragment(), ListContract.View {
 
 
     private fun injectDependency() {
-               BaseApp.instance.component.inject(this)
+
     }
 
     private fun initView(token:String) {

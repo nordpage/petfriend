@@ -10,13 +10,9 @@ import xyz.mobcoder.petfriend.ui.list.ListFragment
 import xyz.mobcoder.petfriend.ui.login.LoginContract
 import xyz.mobcoder.petfriend.ui.login.LoginFragment
 
-@Component(modules = arrayOf(ApplicationModule::class, FragmentModule::class, ActivityModule::class))
+@Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
 
     fun inject(application: BaseApp)
-    fun inject(fragment: ListFragment)
-    fun inject(fragment: LoginFragment)
-    fun inject(activity: AppCompatActivity)
-    fun inject(presenter: LoginContract.Presenter)
 
 }

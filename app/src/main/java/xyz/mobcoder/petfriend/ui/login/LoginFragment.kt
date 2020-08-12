@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
-import xyz.mobcoder.petfriend.BaseApp
 import xyz.mobcoder.petfriend.R
+import xyz.mobcoder.petfriend.di.module.FragmentModule
 import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -52,7 +52,11 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun injectDependency() {
-        BaseApp.instance.component.inject(this)
+        val loginComponent = DaggerFragmentComponent.builder()
+            .fragmentModule(FragmentModule())
+            .build()
+
+        loginComponent.inject(this)
     }
 
     override fun onLogin(token: String) {
