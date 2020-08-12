@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import kotlinx.android.synthetic.main.fragment_login.*
+import xyz.mobcoder.petfriend.BaseApp
 import xyz.mobcoder.petfriend.R
+import javax.inject.Inject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,14 +21,19 @@ private const val ARG_PARAM2 = "param2"
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class LoginFragment : Fragment(), LoginContract.View {
+
+
+    @Inject lateinit var presenter: LoginContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        injectDependency()
+        presenter.attach(this)
 
+        loginBtn.setOnClickListener {
+            presenter.login(login_field.text.toString(), password_field.text.toString())
+        }
     }
 
     override fun onCreateView(
@@ -36,17 +45,27 @@ class LoginFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
         fun newInstance() =
             LoginFragment()
+    }
+
+    private fun injectDependency() {
+        BaseApp.instance.component.inject(this)
+    }
+
+    override fun onLogin(token: String) {
+        Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showProgress(show: Boolean) {
+        prog.visibility = if (show) View.VISIBLE else View.GONE
+        loginBtn.visibility = if (show) View.GONE else View.VISIBLE
+    }
+
+    override fun showErrorMessage(error: String) {
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+
     }
 }

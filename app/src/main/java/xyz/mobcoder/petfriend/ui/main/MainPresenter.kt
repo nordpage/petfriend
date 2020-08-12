@@ -8,7 +8,7 @@ class MainPresenter : MainContract.Presenter {
     private lateinit var view: MainContract.View
 
     override fun onDrawerOptionAboutClick() {
-        view.showAboutFragment()
+      //  view.showAboutFragment()
     }
 
     override fun subscribe() {
@@ -21,6 +21,6 @@ class MainPresenter : MainContract.Presenter {
 
     override fun attach(view: MainContract.View) {
         this.view = view
-        view.showListFragment() // as default
+      //  view.showListFragment() // as default
     }
 }

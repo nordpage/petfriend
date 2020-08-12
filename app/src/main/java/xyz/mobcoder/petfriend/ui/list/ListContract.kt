@@ -14,7 +14,7 @@ class ListContract {
 
     interface Presenter:
         BaseContract.Presenter<View> {
-        suspend fun loadData(token: String)
+        fun loadData(token: String)
         fun deleteItem(item: Pet)
     }
 }

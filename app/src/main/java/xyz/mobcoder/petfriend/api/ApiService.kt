@@ -19,7 +19,7 @@ import xyz.mobcoder.petfriend.model.Token
 interface ApiService {
 
     @POST("register")
-    suspend fun registerUser(
+    fun registerUser(
         @Query("name") name: String,
         @Query("email") email: String,
         @Query("password") password: String,
@@ -27,13 +27,13 @@ interface ApiService {
     ): Observable<Response<Token>>
 
     @POST("login")
-    suspend fun loginUser(
+    fun loginUser(
         @Query("email") email: String,
         @Query("password") password: String
     ) : Observable<Response<Token>>
 
     @GET("pets")
-    suspend fun getPets(
+    fun getPets(
         @Header("Authorization") authHeader: String
     ) : Observable<Response<List<Pet>>>
 

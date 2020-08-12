@@ -1,21 +1,30 @@
-package xyz.mobcoder.petfriend
+package xyz.mobcoder.petfriend.ui.main
 
-import android.content.Context
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import xyz.mobcoder.petfriend.Extensions.getVersion
+import xyz.mobcoder.petfriend.R
+import xyz.mobcoder.petfriend.ViewPagerAdapter
+import xyz.mobcoder.petfriend.ui.bottom.BottomDialogFragment
+import xyz.mobcoder.petfriend.ui.list.ListFragment
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){
+
+    @Inject lateinit var presenter: MainContract.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pager!!.adapter = ViewPagerAdapter(this)
         version.text = "Ver: ${getVersion(this)}"
+
+
+
         version.setOnClickListener {
             val bottomDialogFragment: BottomDialogFragment =
                 BottomDialogFragment.newInstance()
@@ -26,12 +35,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateView(
-        parent: View?,
-        name: String,
-        context: Context,
-        attrs: AttributeSet
-    ): View? {
-        return super.onCreateView(parent, name, context, attrs)
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        FullScreencall()
     }
+
+    fun FullScreencall() {
+        if (Build.VERSION.SDK_INT < 19) {
+            val v = this.window.decorView
+            v.systemUiVisibility = View.GONE
+        } else {
+            //for higher api versions.
+            val decorView = window.decorView
+            val uiOptions =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            decorView.systemUiVisibility = uiOptions
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+    }
+
+
 }

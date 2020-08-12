@@ -30,7 +30,7 @@ class ListPresenter: ListContract.Presenter {
         this.view = view
     }
 
-    override suspend fun loadData(token: String) {
+    override fun loadData(token: String) {
         var subscribe = api.getPets(token).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ list: Response<List<Pet>>? ->

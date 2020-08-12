@@ -1,10 +1,15 @@
 package xyz.mobcoder.petfriend.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_list.*
+import xyz.mobcoder.petfriend.BaseApp
 import xyz.mobcoder.petfriend.Pet
 import xyz.mobcoder.petfriend.R
 import xyz.mobcoder.petfriend.di.module.FragmentModule
@@ -32,16 +37,18 @@ class ListFragment : Fragment(), ListContract.View {
         injectDependency()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        rootView = inflater!!.inflate(R.layout.fragment_list, container, false)
-        return rootView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attach(this)
         presenter.subscribe()
-        initView()
+        initView("token")
     }
 
     override fun onDestroyView() {
@@ -61,44 +68,31 @@ class ListFragment : Fragment(), ListContract.View {
         Log.e("Error", error)
     }
 
-    override fun loadDataSuccess(list: List<Post>) {
-        var adapter = ListAdapter(activity, list.toMutableList(), this)
+
+
+    override fun loadDataSuccess(list: List<Pet>) {
+        var adapter = ListAdapter(requireActivity(), list.toMutableList(), this)
         recyclerView!!.setLayoutManager(LinearLayoutManager(activity))
         recyclerView!!.setAdapter(adapter)
 
-        val swipeHandler = object : SwipeToDelete(activity) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = recyclerView.adapter as ListAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
-            }
-        }
-
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
+//        val swipeHandler = object : SwipeToDelete(activity) {
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                val adapter = recyclerView.adapter as ListAdapter
+//                adapter.removeAt(viewHolder.adapterPosition)
+//            }
+//        }
+//
+//        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+//        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    override fun loadDataAllSuccess(model: DetailsViewModel) {
-        print(model.toJson())
-    }
-
-    override fun itemRemoveClick(post: Post) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun itemDetail(postId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private fun injectDependency() {
-        val listComponent = DaggerFragmentComponent.builder()
-            .fragmentModule(FragmentModule())
-            .build()
-
-        listComponent.inject(this)
+               BaseApp.instance.component.inject(this)
     }
 
-    private fun initView() {
-        presenter.loadData()
+    private fun initView(token:String) {
+        presenter.loadData(token)
     }
 
     companion object {

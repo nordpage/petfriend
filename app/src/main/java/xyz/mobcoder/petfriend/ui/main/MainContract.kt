@@ -5,8 +5,7 @@ import xyz.mobcoder.petfriend.ui.base.BaseContract
 class MainContract {
 
     interface View: BaseContract.View {
-        fun showAboutFragment()
-        fun showListFragment()
+
     }
 
     interface Presenter:
