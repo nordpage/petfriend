@@ -15,13 +15,15 @@ class LoginPresenter: LoginContract.Presenter {
 
     override fun login(email: String, password: String) {
         var subscribe = api.loginUser(email, password).subscribeOn(Schedulers.io())
+            .doOnSubscribe { view.showProgress(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({result: Response<Token>? ->
-                view.showProgress(true)
                 view.onLogin(result!!.data!!.token!!)
             },{error ->
                 view.showProgress(false)
                 view.showErrorMessage(error.localizedMessage)
+            },{
+                view.showProgress(false)
             })
         subscriptions.add(subscribe)
     }

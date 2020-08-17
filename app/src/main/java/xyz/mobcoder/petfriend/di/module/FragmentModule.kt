@@ -8,6 +8,7 @@ import xyz.mobcoder.petfriend.ui.list.ListContract
 import xyz.mobcoder.petfriend.ui.list.ListPresenter
 import xyz.mobcoder.petfriend.ui.login.LoginContract
 import xyz.mobcoder.petfriend.ui.login.LoginPresenter
+import javax.inject.Singleton
 
 /**
  * Created by ogulcan on 07/02/2018.
@@ -17,6 +18,7 @@ class FragmentModule {
 
 
     @Provides
+    @Singleton
     fun provideListPresenter(): ListContract.Presenter {
         return ListPresenter()
     }

@@ -14,6 +14,7 @@ import retrofit2.http.Query
 import xyz.mobcoder.petfriend.Pet
 import xyz.mobcoder.petfriend.model.Response
 import xyz.mobcoder.petfriend.model.Token
+import java.util.concurrent.TimeUnit
 
 
 interface ApiService {
@@ -43,6 +44,9 @@ interface ApiService {
         fun create(): ApiService {
             val logger = HttpLoggingInterceptor().apply { level = Level.BODY }
             val client = OkHttpClient.Builder()
+                .readTimeout(30, TimeUnit.SECONDS)
+                .callTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(logger)
                 .build()
 

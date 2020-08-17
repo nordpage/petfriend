@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_login.*
+import xyz.mobcoder.petfriend.BaseApp
 import xyz.mobcoder.petfriend.R
 import xyz.mobcoder.petfriend.di.module.FragmentModule
 import javax.inject.Inject
@@ -31,9 +32,8 @@ class LoginFragment : Fragment(), LoginContract.View {
         injectDependency()
         presenter.attach(this)
 
-        loginBtn.setOnClickListener {
-            presenter.login(login_field.text.toString(), password_field.text.toString())
-        }
+
+
     }
 
     override fun onCreateView(
@@ -41,9 +41,17 @@ class LoginFragment : Fragment(), LoginContract.View {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loginBtn.setOnClickListener {
+            presenter.login(login_field.text.toString(), password_field.text.toString())
+        }
+    }
     companion object {
 
         @JvmStatic
@@ -52,11 +60,7 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun injectDependency() {
-        val loginComponent = DaggerFragmentComponent.builder()
-            .fragmentModule(FragmentModule())
-            .build()
-
-        loginComponent.inject(this)
+        BaseApp.instance.getApplicationComponent().inject(this)
     }
 
     override fun onLogin(token: String) {
